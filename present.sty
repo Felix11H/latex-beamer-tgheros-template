@@ -1,0 +1,189 @@
+
+
+\usepackage{graphicx}
+
+\useinnertheme{default}
+\beamertemplatenavigationsymbolsempty
+
+% serif config:
+%\usefonttheme{serif}
+%\usepackage{palatino}
+%\usepackage{eulervm} %additional math 
+
+% sans-serif config:
+\usepackage{tgheros}
+\usepackage{sansmath} %additional math 
+
+
+
+\usepackage[english]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+% Other Palatino font packages, with math
+% see also http://tex.stackexchange.com/questions/89610
+% and math_fonts.pdf in Latex docs
+% --------------------
+% \usepackage{pxfonts}
+% \usepackage{mathpazo} % add possibly `sc` and `osf` options
+% --------------------
+
+\setbeamercolor*{structure}{fg=black}
+
+\usepackage{transparent} % transparent graphics
+
+\graphicspath{{../}}
+
+\usepackage{amsmath, amsthm}
+
+% needed for \vfill to produce equal spacing
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}
+}
+\makeatother
+
+
+% -------------- Norm || - || and Abs |-|  -------------- %
+
+% defines \norm{} and \abs to automatically resize
+% see http://tex.stackexchange.com/a/43009/4912
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+
+
+\usepackage[loadonly]{enumitem} % Enumitem-Beamer Incompatibility! See
+                                % http://tex.stackexchange.com/a/52299/4912
+
+\usepackage{siunitx} %use: \SI{300}{\micro\meter}
+% \usepackage{algorithm, algorithmic}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{multicol} %columns, use instead of minipage for vert.
+\usepackage{overpic} %labels over \includegraphics
+\usepackage[export]{adjustbox} %frames for \includegraphics,
+\usepackage{framed}
+\usepackage{caption}
+\captionsetup[figure]{justification=raggedleft, singlelinecheck=false,
+font={scriptsize, color=gray}, skip=3pt} %for image citations
+\usepackage{subcaption}
+\usepackage{nicefrac}
+\usepackage{csquotes}
+
+%---------- Minted for Code --------- %
+
+% \usepackage{minted}
+% \newminted{python}{fontsize=\scriptsize, linenos,
+%                		numbersep=8pt,
+%                		gobble=4,
+%                		frame=lines,
+% 					bgcolor=bg,
+%                		framesep=3mm}         		
+               		
+% \newenvironment{gcode}{\textcolor{tg}{\texttt{}{}}}  
+
+% \usepackage{underscore} %Caution: problems with underscores in filenames!
+
+
+
+
+
+%------------- Biblatex ------------- %
+
+% \usepackage[style=authoryear, url=false, maxbibnames=99, doi=false,
+% maxcitenames=2]{biblatex}
+\setbeamertemplate{bibliography item}{}
+
+\usepackage[backend=bibtex,     % needed for compilation
+            style=authoryear,   %  authoryear-comp maybe?
+            url=true,          %
+            maxbibnames=99,     %
+            doi=false,           %
+            maxcitenames=2,     %
+            dashed=false,        %  (1)
+           ]{biblatex}
+
+
+\DeclareFieldFormat*{urldate}{}
+
+\AtEveryBibitem{%
+  \ifentrytype{misc}{%
+  }{%
+    \clearfield{url}%
+  }%
+}
+
+
+\AtEveryBibitem{\clearlist{language}}
+\AtEveryBibitem{\ifentrytype{article}{\clearfield{issn}}{}}
+\AtEveryBibitem{\clearfield{month}}
+%\AtEveryBibitem{\clearfield{pages}}
+%\AtEveryBibitem{\clearfield{number}}
+%\AtEveryBibitem{\clearfield{volume}}
+\AtEveryBibitem{\clearfield{eprint}}
+\AtEveryBibitem{\clearfield{isbn}}
+\AtEveryBibitem{\clearfield{shorttitle}}
+\AtEveryBibitem{\clearfield{note}}
+
+
+% removes quotation marks for article titles
+\DeclareFieldFormat[article, incollection, inproceedings]{title}{#1} 
+
+
+
+\bibliography{\string~/lib/main} %\string~ to access home
+\renewcommand*{\bibfont}{\footnotesize}
+\setlength\bibitemsep{9pt}
+\setlength\bibhang{4pt}
+
+
+
+%------------- Colors --------------- %
+
+\definecolor{mpl_blue}{rgb}{0,0,1}
+\definecolor{mpl_red}{rgb}{1,0,0}
+\definecolor{mpl_orange}{rgb}{1,0.647,0}
+\definecolor{mpl_purple}{rgb}{0.5,0,0.5}
+
+\newcommand{\Transpar}{0.4}
+
+
+
+
+%-------- Custom Environments ------- %
+
+
+% http://tex.stackexchange.com/questions/84936/
+\newlist{arrowlist}{itemize}{1}
+\setlist[arrowlist]{label=$\Rightarrow$}
+
+
+% \source{} to give picture credit. From
+% http://tex.stackexchange.com/questions/48473
+\usepackage[absolute,overlay]{textpos}
+
+\setbeamercolor{framesource}{fg=gray}
+\setbeamerfont{framesource}{size=\normalfont}
+
+\newcommand{\source}[1]{\begin{textblock*}{4cm}(8.7cm,8.6cm)
+    \begin{beamercolorbox}[ht=0.75cm,right]{framesource}
+        \usebeamerfont{framesource}\usebeamercolor[fg]{framesource}{#1}
+    \end{beamercolorbox}
+\end{textblock*}}
+        
+

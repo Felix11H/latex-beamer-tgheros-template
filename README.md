@@ -1,0 +1,1 @@
+LaTex Beamer tgheros two column template
